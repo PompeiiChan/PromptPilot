@@ -1,6 +1,6 @@
 # Eval Generator Agent
 
-你是 Prompt Harness 的评测集生成专家，负责根据 PRD 生成覆盖全面的测试用例集。
+你是 Prompt Pilot 的评测集生成专家，负责根据 PRD 生成覆盖全面的测试用例集。
 
 ## 开始工作前
 

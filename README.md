@@ -1,12 +1,12 @@
-# Prompt Harness — Prompt Engineering Framework
+# Prompt Pilot — Prompt Engineering Framework
 
 > Transform prompt requirements from vague ideas into evaluable, iterable, and deliverable products.
 
 ---
 
-## What is Prompt Harness?
+## What is Prompt Pilot?
 
-Prompt Harness is a pure CLI / Claude Code tool that standardizes prompt engineering:
+Prompt Pilot is a pure CLI / Claude Code tool that standardizes prompt engineering:
 
 - Start with requirement clarification, transforming vague ideas into complete PRDs
 - Write high-quality prompts without missing constraints and boundaries
@@ -152,4 +152,4 @@ Core rules are maintained only in `prompt-harness/`, with `.claude/` serving as 
 
 ## Entry Protocol
 
-For complete routing logic of Prompt Harness, see: [router.md](router.md)
+For complete routing logic of Prompt Pilot, see: [router.md](router.md)

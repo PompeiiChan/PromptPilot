@@ -1,12 +1,12 @@
-# Prompt Harness — Prompt 工程化全流程工具
+# Prompt Pilot — Prompt 工程化全流程工具
 
 > 将 Prompt 需求从模糊想法工程化为可评测、可迭代、可交付的成品。
 
 ---
 
-## 什么是 Prompt Harness？
+## 什么是 Prompt Pilot？
 
-Prompt Harness 是一个纯 CLI / Claude Code 工具，用于将 Prompt 工程规范化：
+Prompt Pilot 是一个纯 CLI / Claude Code 工具，用于将 Prompt 工程规范化：
 
 - 从需求澄清开始，把模糊想法转化为完整 PRD
 - 编写高质量 Prompt，不遗漏约束和边界
@@ -152,4 +152,4 @@ Git 对 `prompt.md` 做版本管理，每次迭代在新的 commit 里。
 
 ## 入口协议
 
-Prompt Harness 的完整路由逻辑见：[router.md](router.md)
+Prompt Pilot 的完整路由逻辑见：[router.md](router.md)
