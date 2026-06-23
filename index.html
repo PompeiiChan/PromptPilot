@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prompt Pilot — A Human-in-the-Loop Harness for Prompt Engineering</title>
+    <title>Prompt Pilot — 人机协同驾驭 Prompt 工程</title>
     <style>
         * {
             margin: 0;
@@ -25,7 +25,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background: var(--bg-primary);
@@ -89,8 +89,8 @@
         .hero h1 {
             font-size: clamp(2.5rem, 8vw, 4.5rem);
             font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, #1d1d1f 0%, #434344 100%);
             -webkit-background-clip: text;
@@ -322,6 +322,16 @@
             .nav-links {
                 display: none;
             }
+
+            .workflow-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .workflow-step:not(.workflow-step:last-child)::after {
+                content: '↓';
+                margin-left: 0.5rem;
+            }
         }
     </style>
 </head>
@@ -331,10 +341,10 @@
         <div class="nav-content">
             <a href="#" class="nav-logo">Prompt Pilot</a>
             <div class="nav-links">
-                <a href="#overview">Overview</a>
-                <a href="#features">Features</a>
-                <a href="#workflow">Workflow</a>
-                <a href="#philosophy">Philosophy</a>
+                <a href="#overview">项目概述</a>
+                <a href="#features">核心特性</a>
+                <a href="#workflow">工作流程</a>
+                <a href="#philosophy">设计理念</a>
             </div>
         </div>
     </nav>
@@ -342,36 +352,34 @@
     <!-- Hero Section -->
     <section class="hero">
         <h1 class="fade-in">Prompt Pilot</h1>
-        <p class="hero-subtitle fade-in">A Human-in-the-Loop Harness for Prompt Engineering</p>
+        <p class="hero-subtitle fade-in">人机协同驾驭 Prompt 工程</p>
         <p class="hero-description fade-in">
-            Transform vague prompt requirements into production-ready AI agents through systematic evaluation and iteration.
+            将模糊的 Prompt 需求转化为生产级 AI Agent，通过系统化评测与迭代，让 Prompt 工程真正可控、可度量、可交付。
         </p>
         <div class="fade-in">
-            <a href="https://github.com/PompeiiChan/PromptPilot" class="cta-button">View on GitHub</a>
-            <a href="README.md" class="cta-button secondary">Read Docs</a>
+            <a href="https://github.com/PompeiiChan/PromptPilot" class="cta-button">查看 GitHub</a>
+            <a href="README_CN.md" class="cta-button secondary">阅读文档</a>
         </div>
     </section>
 
     <!-- Overview Section -->
     <section class="section-dark" id="overview">
-        <h2 class="section-title fade-in">The Challenge</h2>
-        <p class="section-subtitle fade-in">Why Prompt Engineering needs a better approach</p>
+        <h2 class="section-title fade-in">项目背景</h2>
+        <p class="section-subtitle fade-in">为什么 Prompt 工程需要更好的方法</p>
 
         <div class="philosophy-grid">
             <div class="philosophy-item fade-in">
-                <h3>🔴 The Problem</h3>
+                <h3>🔴 现状问题</h3>
                 <p>
-                    Traditional prompt engineering is ad-hoc and unpredictable. Developers write prompts based on intuition,
-                    test manually with a few examples, and ship—only to discover edge cases in production.
-                    There's no systematic way to evaluate quality or iterate confidently.
+                    传统的 Prompt 工程是临时的、不可预测的。开发者凭直觉编写 Prompt，手动测试几个例子后就上线——
+                    只在生产环境才发现边缘问题。没有系统化的质量评估方法，迭代更是靠运气。
                 </p>
             </div>
             <div class="philosophy-item fade-in">
-                <h3>🟢 The Solution</h3>
+                <h3>🟢 解决方案</h3>
                 <p>
-                    Prompt Pilot treats prompts as software products. From requirement clarification to automated evaluation,
-                    every step is structured and measurable. Humans make strategic decisions; AI handles execution.
-                    Quality is driven by data, not guesswork.
+                    Prompt Pilot 将 Prompt 视为软件产品。从需求澄清到自动化评测，每一步都结构化、可度量。
+                    人类做战略决策，AI 负责执行。质量由数据驱动，而非猜测。
                 </p>
             </div>
         </div>
@@ -379,60 +387,60 @@
 
     <!-- Features Section -->
     <section id="features">
-        <h2 class="section-title fade-in">Core Features</h2>
-        <p class="section-subtitle fade-in">What makes Prompt Pilot different</p>
+        <h2 class="section-title fade-in">核心特性</h2>
+        <p class="section-subtitle fade-in">Prompt Pilot 的与众不同之处</p>
 
         <div class="features-grid">
             <div class="feature-card fade-in">
                 <div class="feature-icon">👤</div>
-                <h3>Human-in-the-Loop</h3>
+                <h3>人在回路（HITL）</h3>
                 <p>
-                    Every critical checkpoint requires human judgment. AI executes analysis, humans make decisions.
-                    This ensures quality while maintaining efficiency—the best of both worlds.
+                    每个关键决策点都需要人类判断。AI 执行分析，人类做决策。
+                    在保证质量的同时维持效率——兼顾两者的优势。
                 </p>
             </div>
 
             <div class="feature-card fade-in">
                 <div class="feature-icon">📊</div>
-                <h3>Data-Driven Iteration</h3>
+                <h3>数据驱动迭代</h3>
                 <p>
-                    Evaluation reports with Good/Bad cases and root cause analysis guide your next move.
-                    Stop guessing—iterate based on evidence.
+                    评测报告包含 Good/Bad case 和根因分析，指导你的下一步行动。
+                    停止猜测——基于证据迭代。
                 </p>
             </div>
 
             <div class="feature-card fade-in">
                 <div class="feature-icon">🔄</div>
-                <h3>Complete Workflow</h3>
+                <h3>完整工作流</h3>
                 <p>
-                    Seven phases from idea to production: Requirements → Writing → Evaluation → Iteration → Publishing.
-                    Nothing falls through the cracks.
+                    七阶段从想法到生产：需求澄清 → 编写 → 评测 → 迭代 → 发布。
+                    无遗漏，无死角。
                 </p>
             </div>
 
             <div class="feature-card fade-in">
                 <div class="feature-icon">⏮️</div>
-                <h3>Git-Based Rollback</h3>
+                <h3>Git 版本回滚</h3>
                 <p>
-                    Every phase and evaluation is automatically tagged. Rollback to any previous state instantly.
-                    Experiment freely—you can always go back.
+                    每个阶段和每次评测都会自动打标签。可随时回滚到任意历史状态。
+                    大胆实验——总能回到过去。
                 </p>
             </div>
 
             <div class="feature-card fade-in">
                 <div class="feature-icon">⚡</div>
-                <h3>Parallel Execution</h3>
+                <h3>并行执行</h3>
                 <p>
-                    Test generation and rubric design run concurrently. Don't wait for sequential steps when they're independent.
+                    测试用例生成和评分框架设计并行运行。当步骤相互独立时，无需等待。
                 </p>
             </div>
 
             <div class="feature-card fade-in">
                 <div class="feature-icon">🎯</div>
-                <h3>Root Cause Analysis</h3>
+                <h3>根因分析</h3>
                 <p>
-                    Failure patterns are aggregated and categorized. Know exactly whether to fix requirements,
-                    refine prompts, or adjust evaluation—upstream problems first.
+                    失效模式被聚合和分类。精确知道该修复需求、优化 Prompt 还是调整评测——
+                    上游问题优先处理。
                 </p>
             </div>
         </div>
@@ -440,45 +448,45 @@
 
     <!-- Workflow Section -->
     <section class="section-dark" id="workflow">
-        <h2 class="section-title fade-in">Seven-Phase Workflow</h2>
-        <p class="section-subtitle fade-in">From vague idea to production-ready prompt</p>
+        <h2 class="section-title fade-in">七阶段工作流</h2>
+        <p class="section-subtitle fade-in">从模糊想法到生产级 Prompt</p>
 
         <div class="workflow-container fade-in">
             <div class="workflow-steps">
                 <div class="workflow-step">
                     <span class="number">1</span>
-                    Requirements Clarification
+                    需求澄清
                 </div>
                 <div class="workflow-step">→</div>
                 <div class="workflow-step">
                     <span class="number">2</span>
-                    Prompt Writing
+                    Prompt 编写
                 </div>
                 <div class="workflow-step">→</div>
                 <div class="workflow-step">
                     <span class="number">3+4</span>
-                    Eval Prep (Parallel)
+                    评测准备（并行）
                 </div>
                 <div class="workflow-step">→</div>
                 <div class="workflow-step">
                     <span class="number">5</span>
-                    Evaluation Run
+                    评测执行
                 </div>
                 <div class="workflow-step">→</div>
                 <div class="workflow-step">
                     <span class="number">?</span>
-                    Human Review
+                    人工 Review
                 </div>
                 <div class="workflow-step">→</div>
                 <div class="workflow-step">
                     <span class="number">7</span>
-                    Publishing
+                    发布入库
                 </div>
             </div>
 
             <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 12px;">
                 <p style="color: var(--text-secondary); text-align: center;">
-                    <strong>Phase 6 (Prompt Compression)</strong> is optional—optimize length without changing behavior.
+                    <strong>Phase 6（Prompt 压缩）</strong>为可选步骤——在不改变行为的前提下优化长度。
                 </p>
             </div>
         </div>
@@ -486,40 +494,36 @@
 
     <!-- Philosophy Section -->
     <section id="philosophy">
-        <h2 class="section-title fade-in">Design Philosophy</h2>
-        <p class="section-subtitle fade-in">The principles behind Prompt Pilot</p>
+        <h2 class="section-title fade-in">设计理念</h2>
+        <p class="section-subtitle fade-in">Prompt Pilot 背后的设计原则</p>
 
         <div class="philosophy-grid">
             <div class="philosophy-item fade-in">
-                <h3>Upstream Problems First</h3>
+                <h3>上游问题优先</h3>
                 <p>
-                    Don't repeatedly polish prompts when requirements are vague. Fixing requirements upstream
-                    is more effective than iterating downstream. Root cause analysis prioritizes Phase 1 issues
-                    over Phase 2—solve the right problem first.
+                    不要在需求模糊时反复打磨 Prompt。修复上游需求比迭代下游更有效。
+                    根因分析优先处理 Phase 1 问题而非 Phase 2——先解决正确的问题。
                 </p>
             </div>
             <div class="philosophy-item fade-in">
-                <h3>Human Judgment Over Automation</h3>
+                <h3>人工判断高于自动化</h3>
                 <p>
-                    AI is great at execution, but strategic decisions need human judgment. HITL protocol ensures
-                    humans approve PRDs, review evaluation reports, and decide iteration routes.
-                    Automation without oversight is a risk.
+                    AI 擅长执行，但战略决策需要人类判断。HITL 协议确保人类审批 PRD、
+                    审查评测报告、决策迭代路线。没有监督的自动化是风险。
                 </p>
             </div>
             <div class="philosophy-item fade-in">
-                <h3>Measurement Drives Improvement</h3>
+                <h3>度量驱动改进</h3>
                 <p>
-                    You can't improve what you don't measure. Evaluation with rubrics and test cases provides
-                    objective metrics. Quality scores and failure patterns tell you exactly where to focus.
-                    Intuition is helpful; data is reliable.
+                    无法度量就无法改进。基于 Rubric 和测试用例的评测提供客观指标。
+                    质量评分和失效模式告诉你应该聚焦哪里。直觉有帮助，数据更可靠。
                 </p>
             </div>
             <div class="philosophy-item fade-in">
-                <h3>Safety Through Versioning</h3>
+                <h3>通过版本控制保障安全</h3>
                 <p>
-                    Git-based tagging means every state is recoverable. Rollback to any phase or evaluation point.
-                    Experiment boldly—mistakes are reversible. This safety net encourages exploration
-                    and prevents fear-driven conservatism.
+                    基于 Git 的标签意味着每个状态都可恢复。可回滚到任意阶段或评测点。
+                    大胆探索——错误可逆转。这个安全网鼓励实验，防止恐惧驱动的保守。
                 </p>
             </div>
         </div>
@@ -529,10 +533,10 @@
     <footer>
         <div class="footer-links">
             <a href="https://github.com/PompeiiChan/PromptPilot">GitHub</a>
-            <a href="README.md">Documentation</a>
+            <a href="README.md">English Docs</a>
             <a href="README_CN.md">中文文档</a>
         </div>
-        <p class="copyright">Prompt Pilot — A Human-in-the-Loop Harness for Prompt Engineering</p>
+        <p class="copyright">Prompt Pilot — 人机协同驾驭 Prompt 工程</p>
     </footer>
 
     <script>
