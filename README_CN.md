@@ -1,4 +1,4 @@
-# Prompt Pilot — 人在回路的 Prompt 工程化框架
+# Prompt Pilot — 人机协同驾驭 Prompt 工程
 
 [![English](https://img.shields.io/badge/lang-English-blue.svg)](README.md) [![中文](https://img.shields.io/badge/lang-中文-red.svg)](README_CN.md)
 
