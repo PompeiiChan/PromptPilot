@@ -269,6 +269,58 @@ active_prompt_path = Prompts_Repo/<id>/
 | Eval Runner | `prompt.md` + `eval/eval-set.json` + `docs/eval-rubric.md` | `eval/results/<run-id>.json` | `skills/eval-runner/SKILL.md` |
 | Prompt Compressor | `prompt.md` + `docs/prd.md` | `prompt.md`（精简版） | `skills/prompt-compression/SKILL.md` |
 
+## 项目回滚机制
+
+Prompt Pilot 使用 Git 标签（tag）管理项目状态，支持回滚到任意阶段或评测点。
+
+### 自动打标规则
+
+每个阶段完成后，Orchestrator 自动创建 Git tag：
+
+| 阶段 | Tag 格式 | 示例 |
+|------|---------|------|
+| Phase 1 完成 | `phase1-<prompt_id>` | `phase1-product-discovery` |
+| Phase 2 完成 | `phase2-<prompt_id>` | `phase2-product-discovery` |
+| Phase 3+4 完成 | `phase3-<prompt_id>` | `phase3-product-discovery` |
+| 每次评测 | `eval-<run-id>` | `eval-20250623-134500` |
+| 压缩后 | `compressed-<timestamp>` | `compressed-20250623-140000` |
+
+### 回滚触发
+
+用户输入以下信号时触发回滚：
+
+- "回滚到 Phase X"
+- "回到阶段 X"
+- "恢复到评测前"
+- "回滚到上次评测"
+
+### 回滚执行
+
+Orchestrator 执行以下步骤：
+
+1. 列出可用 tag 供用户选择（如用户未明确指定）
+2. 使用 `git checkout <tag>` 恢复文件状态
+3. 更新 `.ph/project.json` 的 `active_phase`
+4. 刷新 `REVIEW.md` 指引下一步操作
+5. 建议用户创建新分支（如 `rollback-<timestamp>`）以保留回滚状态
+
+### 回滚后路径
+
+| 回滚到 | 建议下一步 |
+|--------|-----------|
+| Phase 1 | 重新审视 PRD，修改后进入 Phase 2 |
+| Phase 2 | 重新编写 Prompt，或直接进入评测 |
+| Phase 3+4 | 重新生成评测集/框架 |
+| 评测点 | 重新执行评测，或查看历史报告 |
+
+### 标签清理
+
+建议定期清理旧 tag（保留最近 5-10 个），避免标签过多：
+
+```bash
+git tag -l "eval-*" | sort -r | tail -n +6 | xargs git tag -d
+```
+
 ## HITL 协议
 
 ### 核心原则

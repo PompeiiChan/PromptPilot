@@ -160,6 +160,16 @@ Before writing any file, verify the path is within `Prompts_Repo/<active_prompt_
 
 Core rules are maintained only in `prompt-harness/`, with `.claude/` serving as entry adaptation only.
 
+### Git-Based Rollback
+
+Every phase completion and evaluation run is automatically tagged. You can rollback to any previous state:
+
+- **Phase-level**: `phase1-<prompt_id>`, `phase2-<prompt_id>`, etc.
+- **Evaluation-level**: `eval-<run-id>` for specific evaluation points
+- **Compression**: `compressed-<timestamp>` after prompt compression
+
+Rollback restores file state and updates `active_phase` accordingly.
+
 ---
 
 ## Agent List

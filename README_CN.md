@@ -160,6 +160,16 @@ Git 对 `prompt.md` 做版本管理，每次迭代在新的 commit 里。
 
 核心规则只维护在 `prompt-harness/`，`.claude/` 只做入口适配。
 
+### 基于 Git 的回滚机制
+
+每个阶段完成和每次评测都会自动打标签。可以回滚到任意历史状态：
+
+- **阶段级**：`phase1-<prompt_id>`、`phase2-<prompt_id>` 等
+- **评测级**：`eval-<run-id>` 指定某次评测点
+- **压缩后**：`compressed-<timestamp>` 压缩后的状态
+
+回滚会恢复文件状态并同步更新 `active_phase`。
+
 ---
 
 ## 代理清单
