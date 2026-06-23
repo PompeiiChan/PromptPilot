@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompt Pilot — 人机协同驾驭 Prompt 工程</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -219,36 +220,7 @@
             padding: 3rem;
             box-shadow: var(--shadow-md);
             margin-top: 3rem;
-        }
-
-        .workflow-steps {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .workflow-step {
-            background: var(--bg-secondary);
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .workflow-step .number {
-            width: 24px;
-            height: 24px;
-            background: var(--accent-blue);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
+            overflow-x: auto;
         }
 
         /* Design Philosophy */
@@ -321,16 +293,6 @@
 
             .nav-links {
                 display: none;
-            }
-
-            .workflow-steps {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .workflow-step:not(.workflow-step:last-child)::after {
-                content: '↓';
-                margin-left: 0.5rem;
             }
         }
     </style>
@@ -452,42 +414,33 @@
         <p class="section-subtitle fade-in">从模糊想法到生产级 Prompt</p>
 
         <div class="workflow-container fade-in">
-            <div class="workflow-steps">
-                <div class="workflow-step">
-                    <span class="number">1</span>
-                    需求澄清
-                </div>
-                <div class="workflow-step">→</div>
-                <div class="workflow-step">
-                    <span class="number">2</span>
-                    Prompt 编写
-                </div>
-                <div class="workflow-step">→</div>
-                <div class="workflow-step">
-                    <span class="number">3+4</span>
-                    评测准备（并行）
-                </div>
-                <div class="workflow-step">→</div>
-                <div class="workflow-step">
-                    <span class="number">5</span>
-                    评测执行
-                </div>
-                <div class="workflow-step">→</div>
-                <div class="workflow-step">
-                    <span class="number">?</span>
-                    人工 Review
-                </div>
-                <div class="workflow-step">→</div>
-                <div class="workflow-step">
-                    <span class="number">7</span>
-                    发布入库
-                </div>
-            </div>
+            <div class="mermaid" style="background: var(--bg-secondary); padding: 2rem; border-radius: 12px;">
+flowchart TD
+    A[🎯 需求澄清<br/>Phase 1] --> B[✍️ Prompt 编写<br/>Phase 2]
+    B --> C{📊 评测准备<br/>Phase 3+4}
+    C --> D[🧪 评测集生成<br/>测试用例]
+    C --> E[📏 评测框架设计<br/>评分标准]
+    D --> F[🚀 评测执行<br/>Phase 5]
+    E --> F
+    F --> G{👤 人工 Review}
+    G -->|Phase 1 根因| A
+    G -->|Phase 3/4 问题| C
+    G -->|Phase 2 问题| B
+    G -.->|可选| I[🗜️ 压缩优化<br/>Phase 6]
+    I --> F
+    G -->|✅ 验收通过| P[📦 发布入库<br/>Phase 7]
+    P --> H[🎉 完成]
 
-            <div style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-secondary); border-radius: 12px;">
-                <p style="color: var(--text-secondary); text-align: center;">
-                    <strong>Phase 6（Prompt 压缩）</strong>为可选步骤——在不改变行为的前提下优化长度。
-                </p>
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#e8f5e9
+    style E fill:#e8f5e9
+    style F fill:#fce4ec
+    style G fill:#fff9c4
+    style P fill:#b3e5fc
+    style H fill:#c8e6c9
+    style I fill:#e1bee7
             </div>
         </div>
     </section>
@@ -556,6 +509,17 @@
 
         document.querySelectorAll('.fade-in').forEach(el => {
             observer.observe(el);
+        });
+
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'default',
+            flowchart: {
+                useMaxWidth: false,
+                htmlLabels: true,
+                curve: 'basis'
+            }
         });
 
         // Smooth scroll for navigation
