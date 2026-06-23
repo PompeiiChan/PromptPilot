@@ -1,5 +1,7 @@
 # Prompt Pilot — Prompt 工程化全流程工具
 
+[![English](https://img.shields.io/badge/lang-English-blue.svg)](README.md) [![中文](https://img.shields.io/badge/lang-中文-red.svg)](README_CN.md)
+
 > 将 Prompt 需求从模糊想法工程化为可评测、可迭代、可交付的成品。
 
 ---
