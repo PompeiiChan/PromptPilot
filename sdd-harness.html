@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDD Harness — 双引擎软件开发框架</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f7;
+            --text-primary: #1d1d1f;
+            --text-secondary: #6e6e73;
+            --accent-purple: #8b5cf6;
+            --accent-purple-dark: #7c3aed;
+            --accent-blue: #0066cc;
+            --card-bg: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+            --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 22px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 120px 22px 80px;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #1d1d1f 0%, #434344 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 14px 30px;
+            background: var(--accent-purple);
+            color: white;
+            text-decoration: none;
+            border-radius: 980px;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .cta-button:hover {
+            background: var(--accent-purple-dark);
+            transform: scale(1.02);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--accent-purple);
+            border: 1px solid var(--accent-purple);
+            margin-left: 1rem;
+        }
+
+        .cta-button.secondary:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 100px 22px;
+            max-width: 980px;
+            margin: 0 auto;
+        }
+
+        .section-dark {
+            background: var(--bg-secondary);
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .feature-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-purple-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Workflow Section */
+        .workflow-container {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            margin-top: 3rem;
+            overflow-x: auto;
+        }
+
+        /* Design Philosophy */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .philosophy-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .philosophy-item p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Dual Engine */
+        .dual-engine {
+            display: flex;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .engine-card {
+            flex: 1;
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            text-align: center;
+        }
+
+        .engine-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .engine-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .engine-tag {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .engine-tag.sdd {
+            background: #ede9fe;
+            color: var(--accent-purple);
+        }
+
+        .engine-tag.prompt {
+            background: #dbeafe;
+            color: var(--accent-blue);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-secondary);
+            padding: 3rem 22px;
+            text-align: center;
+        }
+
+        .footer-links {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links a {
+            color: var(--accent-purple);
+            text-decoration: none;
+            margin: 0 1rem;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .dual-engine {
+                flex-direction: column;
+            }
+
+            .hero {
+                padding-top: 140px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="nav-logo">SDD Harness</a>
+            <div class="nav-links">
+                <a href="#overview">项目概述</a>
+                <a href="#features">核心特性</a>
+                <a href="#workflow">工作流程</a>
+                <a href="#philosophy">设计理念</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1 class="fade-in">SDD Harness</h1>
+        <p class="hero-subtitle fade-in">双引擎软件开发框架</p>
+        <p class="hero-description fade-in">
+            软件开发（SDD）+ Prompt 工程（Prompt Pilot）双引擎驱动，从需求到开发的全流程规范化框架。
+            三端统一、路径守门、阶段门禁，让软件开发真正可控、可追溯、可交付。
+        </p>
+        <div class="fade-in">
+            <a href="https://github.com/PompeiiChan/PromptPilot" class="cta-button">查看 GitHub</a>
+            <a href="harness-core/router.md" class="cta-button secondary">阅读文档</a>
+        </div>
+    </section>
+
+    <!-- Dual Engine Section -->
+    <section class="section-dark" id="overview">
+        <h2 class="section-title fade-in">双引擎架构</h2>
+        <p class="section-subtitle fade-in">软件开发 + Prompt 工程，一站式解决方案</p>
+
+        <div class="dual-engine fade-in">
+            <div class="engine-card">
+                <span class="engine-tag sdd">SDD</span>
+                <h3>软件开发引擎</h3>
+                <p>
+                    从需求澄清、PRD 设计、原型制作到开发计划，
+                    完整的产品设计流程。
+                </p>
+                <p style="font-size: 0.9rem; color: var(--accent-purple);">
+                    R → A → B1 → B2 → C
+                </p>
+            </div>
+
+            <div class="engine-card">
+                <span class="engine-tag prompt">Prompt Pilot</span>
+                <h3>Prompt 工程引擎</h3>
+                <p>
+                    从需求澄清到评测发布的完整 Prompt 工程化流程，
+                    人机协同、数据驱动。
+                </p>
+                <p style="font-size: 0.9rem; color: var(--accent-blue);">
+                    7 阶段完整闭环
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <h2 class="section-title fade-in">核心特性</h2>
+        <p class="section-subtitle fade-in">SDD Harness 的与众不同之处</p>
+
+        <div class="features-grid">
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🔄</div>
+                <h3>四路顶层路由</h3>
+                <p>
+                    新建项目、已有项目修整、导入已有项目、删除项目——
+                    四个入口覆盖全生命周期，意图清晰分流。
+                </p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🚦</div>
+                <h3>路径守门机制</h3>
+                <p>
+                    所有业务文件必须写入 `Projects_Repo/<active_project_id>/`，
+                    Harness 根目录严禁业务产物，零误写入。
+                </p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">✅</div>
+                <h3>阶段门禁确认</h3>
+                <p>
+                    每个阶段完成后必须用户确认才能进入下一阶段。
+                    禁止跳步，禁止静默推进，用户始终掌控节奏。
+                </p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">⏮️</div>
+                <h3>Git 版本回滚</h3>
+                <p>
+                    每个阶段和每次关键操作自动打标签。
+                    随时回滚到任意历史状态，大胆实验。
+                </p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">🎯</div>
+                <h3>三端统一入口</h3>
+                <p>
+                    Codex、Claude Code、Cursor 三端统一协议。
+                    核心流程只维护在 harness-core/，平台目录只做适配。
+                </p>
+            </div>
+
+            <div class="feature-card fade-in">
+                <div class="feature-icon">📦</div>
+                <h3>项目注册表管理</h3>
+                <p>
+                    统一的项目注册表，自动管理 active_project_id。
+                    脚本初始化、状态同步、一键切换项目。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Workflow Section -->
+    <section class="section-dark" id="workflow">
+        <h2 class="section-title fade-in">产品设计工作流</h2>
+        <p class="section-subtitle fade-in">从需求澄清到开发计划，五阶段完整闭环</p>
+
+        <div class="workflow-container fade-in">
+            <div style="background: var(--bg-primary); padding: 2rem; border-radius: 12px;">
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; align-items: center;">
+                    <div style="background: #ede9fe; padding: 1rem 1.5rem; border-radius: 12px; font-weight: 500;">
+                        🎯 R 需求澄清
+                    </div>
+                    <div style="color: var(--text-secondary);">→</div>
+                    <div style="background: #e0e7ff; padding: 1rem 1.5rem; border-radius: 12px; font-weight: 500;">
+                        📝 A PRD 初稿
+                    </div>
+                    <div style="color: var(--text-secondary);">→</div>
+                    <div style="background: #dbeafe; padding: 1rem 1.5rem; border-radius: 12px; font-weight: 500;">
+                        🎨 B1 设计规范
+                    </div>
+                    <div style="color: var(--text-secondary);">→</div>
+                    <div style="background: #d1fae5; padding: 1rem 1.5rem; border-radius: 12px; font-weight: 500;">
+                        🖼️ B2 原型验证
+                    </div>
+                    <div style="color: var(--text-secondary);">→</div>
+                    <div style="background: #fce7f3; padding: 1rem 1.5rem; border-radius: 12px; font-weight: 500;">
+                        📋 C 开发计划
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1rem; background: var(--bg-secondary); border-radius: 8px; font-size: 0.9rem; color: var(--text-secondary);">
+                    <strong>阶段说明：</strong>
+                    <ul style="margin: 0.5rem 0 0 1.5rem;">
+                        <li><strong>R</strong>：需求澄清 + 竞品调研 + 视觉证据沉淀</li>
+                        <li><strong>A</strong>：PRD 初稿（A1 功能列表 → A2 用户故事 → A3 数据契约 → A4 业务规则 → A5 非功能需求）</li>
+                        <li><strong>B1</strong>：Design Context + Design Spec（UI 设计规范）</li>
+                        <li><strong>B2</strong>：原型架构选择 + HTML/Pencil/Stitch 原型 + 验证</li>
+                        <li><strong>C</strong>：PRD 定稿 + api-contracts.md + Plan.md</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy">
+        <h2 class="section-title fade-in">设计理念</h2>
+        <p class="section-subtitle fade-in">SDD Harness 背后的设计原则</p>
+
+        <div class="philosophy-grid">
+            <div class="philosophy-item fade-in">
+                <h3>核心规则单一维护</h3>
+                <p>
+                    SDD 核心流程只维护在 harness-core/，平台目录（.codex/.cursor/.claude）只做适配。
+                    一处修改，三端同步，避免规则分裂。
+                </p>
+            </div>
+            <div class="philosophy-item fade-in">
+                <h3>禁止跳步，门禁优先</h3>
+                <p>
+                    每个阶段必须用户确认才能进入下一阶段。
+                    "继续"只在明确询问后生效，防止误判意图导致跳步。
+                </p>
+            </div>
+            <div class="philosophy-item fade-in">
+                <h3>路径守门，零误写入</h3>
+                <p>
+                    所有业务文件必须写入 Projects_Repo/<active_project_id>/，
+                    Harness 根目录严禁业务产物。路径守门，零误写入。
+                </p>
+            </div>
+            <div class="philosophy-item fade-in">
+                <h3>精简产出，禁止文件膨胀</h3>
+                <p>
+                    非必要不新增文件。过程中的调研、草稿、中间结论在对话中完成，
+                    最终结论合并写入核心文件。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="https://github.com/PompeiiChan/PromptPilot">GitHub</a>
+            <a href="harness-core/router.md">SDD 文档</a>
+            <a href="prompt-harness/router.md">Prompt Pilot 文档</a>
+        </div>
+        <p class="copyright">SDD Harness — 双引擎软件开发框架</p>
+    </footer>
+
+    <script>
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
