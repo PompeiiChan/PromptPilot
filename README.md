@@ -2,6 +2,8 @@
 
 [![English](https://img.shields.io/badge/lang-English-blue.svg)](README.md) [![中文](https://img.shields.io/badge/lang-中文-red.svg)](README_CN.md)
 
+**Prompt Pilot** is a systematic framework for prompt engineering that transforms vague requirements into production-ready AI agents through rigorous evaluation and iteration. Unlike ad-hoc prompt writing, Prompt Pilot treats prompts as software products: starting from clear PRDs, generating comprehensive test suites, running automated evaluations, and iterating based on data-driven feedback—all within your CLI or Claude Code environment.
+
 > Transform prompt requirements from vague ideas into evaluable, iterable, and deliverable products.
 
 ---

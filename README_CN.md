@@ -2,6 +2,8 @@
 
 [![English](https://img.shields.io/badge/lang-English-blue.svg)](README.md) [![中文](https://img.shields.io/badge/lang-中文-red.svg)](README_CN.md)
 
+**Prompt Pilot** 是一套 Prompt 工程化框架，通过严谨的评测与迭代流程，将模糊的需求转化为生产级的 AI Agent。不同于临时性的 Prompt 编写，Prompt Pilot 将 Prompt 视为软件产品：从清晰的需求文档（PRD）开始，生成全面的测试集，执行自动化评测，并基于数据反馈进行迭代——全部在你的 CLI 或 Claude Code 环境中完成。
+
 > 将 Prompt 需求从模糊想法工程化为可评测、可迭代、可交付的成品。
 
 ---
