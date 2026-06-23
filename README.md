@@ -22,11 +22,33 @@ All prompt project files are written to `Prompts_Repo/<prompt_id>/`, separated f
 
 ---
 
-## Seven-Phase Workflow
+## Workflow
 
-```text
-Requirements → Prompt Writing → Eval Gen || Eval Design → Eval Run → Human Review → Iteration Loop
-               (Phase 1)        (Phase 2)      (Phase 3+4 Parallel)     (Phase 5)      (Review)      (Loop)
+```mermaid
+flowchart TD
+    A[🎯 Requirements<br/>Phase 1] --> B[✍️ Prompt Writing<br/>Phase 2]
+    B --> C{📊 Eval Prep<br/>Phase 3+4}
+    C --> D[🧪 Eval Generator<br/>Test Cases]
+    C --> E[📏 Eval Designer<br/>Rubric & Scoring]
+    D --> F[🚀 Eval Run<br/>Phase 5]
+    E --> F
+    F --> G{👤 Human Review}
+    G -->|Phase 1 Root Cause| A
+    G -->|Phase 3/4 Issues| C
+    G -->|Phase 2 Issues| B
+    G -->|✅ Accept| H[🎉 Done]
+    G -.->|Optional| I[🗜️ Compress<br/>Phase 6]
+    I --> F
+
+    style A fill:#e3f2fd
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style D fill:#e8f5e9
+    style E fill:#e8f5e9
+    style F fill:#fce4ec
+    style G fill:#fff9c4
+    style H fill:#c8e6c9
+    style I fill:#e1bee7
 ```
 
 ### Phase 1: Requirements Clarification
