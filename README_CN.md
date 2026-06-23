@@ -36,9 +36,10 @@ flowchart TD
     G -->|Phase 1 根因| A
     G -->|Phase 3/4 问题| C
     G -->|Phase 2 问题| B
-    G -->|✅ 验收通过| H[🎉 完成]
     G -.->|可选| I[🗜️ 压缩优化<br/>Phase 6]
     I --> F
+    G -->|✅ 验收通过| P[📦 发布入库<br/>Phase 7]
+    P --> H[🎉 完成]
 
     style A fill:#e3f2fd
     style B fill:#f3e5f5
@@ -47,6 +48,7 @@ flowchart TD
     style E fill:#e8f5e9
     style F fill:#fce4ec
     style G fill:#fff9c4
+    style P fill:#b3e5fc
     style H fill:#c8e6c9
     style I fill:#e1bee7
 ```

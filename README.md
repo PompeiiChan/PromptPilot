@@ -36,9 +36,10 @@ flowchart TD
     G -->|Phase 1 Root Cause| A
     G -->|Phase 3/4 Issues| C
     G -->|Phase 2 Issues| B
-    G -->|✅ Accept| H[🎉 Done]
     G -.->|Optional| I[🗜️ Compress<br/>Phase 6]
     I --> F
+    G -->|✅ Accept| P[📦 Publish<br/>Phase 7]
+    P --> H[🎉 Done]
 
     style A fill:#e3f2fd
     style B fill:#f3e5f5
@@ -47,6 +48,7 @@ flowchart TD
     style E fill:#e8f5e9
     style F fill:#fce4ec
     style G fill:#fff9c4
+    style P fill:#b3e5fc
     style H fill:#c8e6c9
     style I fill:#e1bee7
 ```
