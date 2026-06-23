@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git commit -m 'Fix SDD hero description line spacing *)"
+    ]
+  }
+}
